@@ -12,7 +12,7 @@ In this post I don't want to dwell as much on Google's advancements in tightenin
 
 ## It's Already In Your Games!
 
-I'm gonna go ahead and broaden the definition of Negative Latency beyond what Google describes and have some fun with it. In my definition, negative latency is any game mechanic where-in the game responds faster to your inputs than would have been realistic in a true simulation. Let's go through some genres:
+I'm gonna go ahead and broaden the definition of Negative Latency beyond what Google describes and have some fun with it. In my definition, 'Negative Latency' is any game mechanic where-in the game responds faster to your inputs than would have been realistic in a true simulation. Let's go through some genres:
 
 * Fighting
 
@@ -28,7 +28,7 @@ I'm gonna go ahead and broaden the definition of Negative Latency beyond what Go
 
 * First Person Shooter
 
-> The moment you hit respawn your placed within a combat encounter with the enemy *as if* your character was marching towards the battlefield long before you took control of him.
+> The moment you hit respawn, you are placed within seconds of a combat encounter with the enemy *as if* your character was marching towards the battlefield long before you took control of him.
 
 ## Snappy Actions
 
@@ -38,4 +38,28 @@ Consider a subset of games that don't have instant response - VR titles. In a VR
 
 In contrast, the shiny colored buttons of a fightstick with satisfying tactile clicks and a clear distinction between inactive and activated states almost demands a parallel within the game - where the action of the player slamming their finger on a button perfectly mirrors the in-game character making contact with their opponent.
 
-Nintendo has refined this technique so well, of complementing the user's inputs, that it also extends to the user interfaces within their titles and platforms - where every selection made has a instant chime, only then followed by satisfying yet subtle menu transitions, an experience that almost sings a harmony to the player's own audible button presses. You know Nintendo is self-aware of this part of their design when snapping fingers is the catch phrase for the Switch.
+Nintendo has refined this technique of complementing the user's inputs so wel that it also extends to the user interfaces. Within their game menus every selection made has a instant chime, only then followed by satisfying yet subtle menu transitions. This creates an experience that almost sings a harmony to the player's own audible button presses. You know Nintendo is self-aware of this part of their design when snapping fingers is the catch phrase for the Switch.
+
+## Can We Generalize?
+
+I'm a programmer by trade, so my first response after coming to this conclusion is to try and figure out some sort of universal generalization. To this end I need to go back to my initial definition - *'Negative Latency' is any game mechanic where-in the game responds **faster** to your inputs than would have been realistic in a **true simulation***.
+
+>Let's imagine a simple fighting game and figure out if we can come up with a rule-of-thumb.
+* Start with a **true simulation**
+    > * When the user hits the punch button, the character has to plant his feet, wind up his fist and push it forward before he is able to damage the opponent
+    > * Time taken during this process might be ~1 second, or 60 frames
+
+Ok, well this game's bad, if you know anything about the infamous Genesis game Shaq Fu, you know that adding build-up frames and delay before actions where in other games there was none feels backwards and terrible. Shaq Fu was nuts enough to try adding buildup animations to *jumping animations* no less. We need to keep moving forward.
+
+* Keep a running history of the game state
+    > * Every frame of character movement is recorded in-full: Current animation, animation progress, position, velocity
+    > * Any previous frame can be perfectly restored and resimulated without any change to final outcome
+
+Another strange in-between step that needs to be made --- Imagine what it takes for a drawing program to restore old changes by pressing ctrl+z [undo], the program has to essentially keep track of the state of the application before the user clicked the mouse versus afterwards. This allows us to do something akin to sorcery:
+
+* Send button presses *into the past*
+    > * When the player presses the punch button, restore the state of the game 60 frames in the past **except** the punch input is activated
+* Resimulate the game forward until it reaches the current frame again
+    > * Flash-forward to current frame where the punch animation has already gone through its wind-up phase and the fist is firmly in the opponents face
+
+Alright, so we're back where we started essentially, but it's generic - The frame where the player hits the punch is the frame in which the character contacts the opponent.
