@@ -14,15 +14,28 @@ In this post I don't want to dwell as much on Google's advancements in tightenin
 
 I'm gonna go ahead and broaden the definition of Negative Latency beyond what Google describes and have some fun with it. In my definition, negative latency is any game mechanic where-in the game responds faster to your inputs than would have been realistic in a true simulation. Let's go through some genres:
 
-### Fighting
+* Fighting
 
-The moment you press a light-attack button your characters fist/foot is jutted out forward *as if* the character had time to wind up and push out their limb in advance of you pushing the button.
+> The moment you press a light-attack button your characters fist/foot is jutted out forward *as if* the character had time to wind up and push out their limb in advance of you pushing the button.
 
-### Real-time Strategy
+* Real-time Strategy
 
-The moment you place a building down, the frame is already placed down *as if* the frame was already in-development long before you desired it's placement.
+> The moment you place a building down, the frame is already placed down *as if* the frame was already in-development long before you desired it's placement.
 
-### Real-time Tactics
+* Real-time Tactics
 
-The moment you order new units into the battlefield, they appear at the bottom of the screen *as if* your general had anticipated their necessity well in advance of your command to send them in.
+> The moment you order new units into the battlefield, they appear at the bottom of the screen *as if* your general had anticipated their necessity well in advance of your command to send them in.
 
+* First Person Shooter
+
+> The moment you hit respawn your placed within a combat encounter with the enemy *as if* your character was marching towards the battlefield long before you took control of him.
+
+## Snappy Actions
+
+So my initial observation when noting that we already have some semblance of negative latency is: *Instant responses to input resonate well with digital buttons.*
+
+Consider a subset of games that don't have instant response - VR titles. In a VR fighting game, the player himself performs wind-ups and followthroughs before making contact with the opponent, since that's what the analog nature of motion controllers asks of the player. Having an instant punch come out due to motion controls would be strange and out-of-place.
+
+In contrast, the shiny colored buttons of a fightstick with satisfying tactile clicks and a clear distinction between inactive and activated states almost demands a parallel within the game - where the action of the player slamming their finger on a button perfectly mirrors the in-game character making contact with their opponent.
+
+Nintendo has refined this technique so well, of complementing the user's inputs, that it also extends to the user interfaces within their titles and platforms - where every selection made has a instant chime, only then followed by satisfying yet subtle menu transitions, an experience that almost sings a harmony to the player's own audible button presses. You know Nintendo is self-aware of this part of their design when snapping fingers is the catch phrase for the Switch.
