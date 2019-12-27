@@ -1,6 +1,6 @@
-# Negative Latency
+# Designing Games for "Negative Latency"
 
-## Origins
+## Background
 
 The term 'Negative Latency' picked up a little bit recently with the release of Google Stadia. With Stadia, the game client is really light-weight, and just needs to send controller inputs and translate video/audio feeds back from the server -- the server is the one doing all the heavy lifting. The problem with this scenario for the vast majority of gamers I'm immersed in is the problem of input latency.
 
@@ -38,7 +38,7 @@ Consider a subset of games that don't have instant response - VR titles. In a VR
 
 In contrast, the shiny colored buttons of a fightstick with satisfying tactile clicks and a clear distinction between inactive and activated states almost demands a parallel within the game - where the action of the player slamming their finger on a button perfectly mirrors the in-game character making contact with their opponent.
 
-Nintendo has refined this technique of complementing the user's inputs so wel that it also extends to the user interfaces. Within their game menus every selection made has a instant chime, only then followed by satisfying yet subtle menu transitions. This creates an experience that almost sings a harmony to the player's own audible button presses. You know Nintendo is self-aware of this part of their design when snapping fingers is the catch phrase for the Switch.
+Nintendo has refined this technique of complementing the user's inputs so well that it also extends to the user interfaces. Within their game menus every selection made has a instant chime, only then followed by satisfying yet subtle menu transitions. This creates an experience that almost sings a harmony to the player's own audible button presses. You know Nintendo is self-aware of this part of their design when snapping fingers is the catch phrase for the Switch.
 
 ## Can We Generalize?
 
