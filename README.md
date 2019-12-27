@@ -59,7 +59,36 @@ Another strange in-between step that needs to be made --- Imagine what it takes 
 
 * Send button presses *into the past*
     > * When the player presses the punch button, restore the state of the game 60 frames in the past **except** the punch input is activated
+    > * This would not necessarily trigger the punch animation instantly if another animation is already being played and could simply enqueue a 'punch' action into the action buffer to be played later
 * Resimulate the game forward until it reaches the current frame again
     > * Flash-forward to current frame where the punch animation has already gone through its wind-up phase and the fist is firmly in the opponents face
 
-Alright, so we're back where we started essentially, but it's generic - The frame where the player hits the punch is the frame in which the character contacts the opponent.
+Alright, so we're back where we started essentially, but it's generic - The frame where the player hits the punch is the frame in which the character contacts the opponent. It kind of begs the question of that the point of this extra computing was if we could have accomplished the same thing by just removing the wind-up animation for the punch to begin with.
+
+## Benefits
+
+Beyond just being an interesting mental exercise, I do see a couple of interesting side effects from using a generic solution for Negative Latency.
+
+Again specific to fighting games, if you've watched enough Street Fighter you'll note how strange light attacks look in these titles: Characters conjure force out of nowhere to create an instant attack and have a longer than expected cool-down to balance the attack - reduce repeatedly spamming the move. Conversely you'll have flashy looking special attacks that take a complex user input and display a series of well animated, satisfying build-ups and impacts in each strike. It's all just a canned inescapable animation created by an artist that happens automatically the moment the first strike successfully [and usually **instantly**] lands.
+
+In this *true simulated Negative Latency* fighting game, a player spamming a light attack would look decidedly different - the first attack would still be jilted and snappy to respond to the button instantly, but the cool-down could be legitimately shorter, since the next punch will simply be buffered for when the cool-down finishes and will probably play through its full build-up phase before being able to land the next hit. Essentially beyond the first strike, the character's limbs will have smooth motions and never snap unnaturally.
+
+The end result is a smoother *combination* of attacks beyond the first strike - the player can confirm a light punch into a couple short kicks, jump-punch and heavy kick to knock the opponent down, and it can all look *as smooth* as an artist produced super move, while still being player controlled. Every kick and punch - even jump animation - could all have physically accurate and weighty animations when actions are buffered, while still being snappy and instant when used from a neutral state. The best of both worlds!
+
+## Complications
+
+It will still take a fair amount of finessing to get this system to look right and not have some strange looking side-effects. One simple example is if you coded the left-right movement to resimulate into the past. Since you can essentially cancel moving in one direction to the other instantly, it would be pretty common to see the character popping from left to right as the left movements of the past are erased and replaced with right movements in the new timeline.
+
+Ideally each animation state should have its own max allowable resimulation time that would probably scale with the duration of the animation, where moving left and right gets almost not resimulation time, and heavy attacks can get tonnes more. We should never simulate *beyond* when the character contacts his opponent, and should probably also quit early if his position changes too dramatically. This still requires some artistic finagling.
+
+I've also only imagined this solution for a fighting game example that seems realistic and attainable. I haven't really explored how this concept could expand out to RTS games or FPS games. Maybe it would work similarily, or we'd need extra rules to make the game work with more than 2 players, maybe it doesn't translate at all!
+
+## Conclusion
+
+It may be viable for certain games to introduce some sort of generified Negative Latency algorithm, but stochastic simulations, difficult to quantify game states, and complex multiplayer could make it totally untenable. Regardless, trying to isolate the phenomenon of Negative Latency and quantify how it works can help us design snappier more satisfying games in the future.
+
+## Inspiration / Sources
+
+"Google Stadia shooting for negative latency by predicting players’ moves" - https://www.digitaltrends.com/gaming/google-stadia-negative-latency/
+
+Runahead Method in RetroArch - https://www.libretro.com/index.php/retroarch-1-7-2%E2%80%8A-%E2%80%8Aachieving-better-latency-than-original-hardware-through-new-runahead-method/
